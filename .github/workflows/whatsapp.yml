@@ -1,25 +1,25 @@
 name: WhatsApp Bot Scheduler
 
 on:
+  workflow_dispatch:  # Permite ejecutar manualmente desde GitHub Actions
   schedule:
-    # Primer día hábil del mes a las 9:00 AM UTC (ajusta según tu zona)
-    - cron: '0 9 1 * *'
+    - cron: '0 12 1 * *'  # Primer día del mes a las 12:00 UTC (ajusta si quieres)
 
 jobs:
-  send-message:
+  run-whatsapp-bot:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run bot
-      run: node index.js
+      - name: Run WhatsApp Bot
+        run: node index.js
